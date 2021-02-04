@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    # Set DEPLOYPATH to the webhost [PROJECT] root directory
+    - export DEPLOYPATH=/home/stonepla
+    # Copy all files recursively to DEPLOYPATH
+    - /bin/cp -R * $DEPLOYPATH
