@@ -28,4 +28,4 @@ We may update our Terms and Conditions from time to time. Thus, you are advised 
 
 ### Contact Us
 
-If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us at [Webmaster@StonePlayground.com](mailto:Webmaster@StonePlayground.com?subject="Terms of Service").
+If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us at [Webmaster@StonePlayground.com](mailto:Webmaster@StonePlayground.com?subject=Terms%20of%20Service").
