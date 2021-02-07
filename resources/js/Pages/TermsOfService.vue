@@ -1,11 +1,11 @@
 <template>
     <div class="font-sans text-gray-900 antialiased">
-        <div class="pt-4 bg-gray-100">
+        <div class="py-5 bg-gray-100">
             <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
               <!-- Logo -->
               <div class="flex-shrink-0 flex items-center">
                 <inertia-link :href="route('dashboard')">
-                  <jet-application-mark class="block h-9 w-auto" />
+                  <jet-application-logo class="block h-9 w-auto" />
                 </inertia-link>
               </div>
 
@@ -17,13 +17,14 @@
 </template>
 
 <script>
-import JetApplicationMark from "@/Jetstream/ApplicationMark";
+
+import JetApplicationLogo from '@/Jetstream/ApplicationLogo';
 
 export default {
     props: ['terms'],
 
     components: {
-        JetApplicationMark,
+        JetApplicationLogo,
     },
 }
 </script>

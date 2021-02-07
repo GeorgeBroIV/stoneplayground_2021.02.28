@@ -12,6 +12,16 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+	
+	
+	    <style>
+		    div.sticky {
+			    position: -webkit-sticky;
+			    position: sticky;
+			    top: 0;
+			    font-size: 20px;
+		    }
+	    </style>
 
         <!-- Scripts -->
         @routes

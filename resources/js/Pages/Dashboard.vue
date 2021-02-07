@@ -2,34 +2,31 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
+                Main Dashboard
             </h2>
         </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <welcome />
-                </div>
+        <div class="max-w-7xl mx-auto py-5 sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <welcome />
             </div>
         </div>
-      <template #footer>
-        <div class="flex">
-          <div class="text-gray-400 ml-7">
-            &copy; 2021 StonePlayground.com | All rights reserved
+        <template #footer>
+          <div class="flex">
+            <div class="text-gray-400 ml-7">
+              &copy; 2021 StonePlayground.com | All rights reserved
+            </div>
+            <div class="text-gray-400 ml-7">
+              <inertia-link :href="'/terms-of-service'">
+                Terms of Service
+              </inertia-link>
+            </div>
+            <div class="text-gray-400 ml-7">
+              <inertia-link :href="'/privacy-policy'">
+                Privacy Policy
+              </inertia-link>
+            </div>
           </div>
-          <div class="text-gray-400 ml-7">
-            <inertia-link :href="'/terms-of-service'">
-              Terms of Service
-            </inertia-link>
-          </div>
-          <div class="text-gray-400 ml-7">
-            <inertia-link :href="'/privacy-policy'">
-              Privacy Policy
-            </inertia-link>
-          </div>
-        </div>
-      </template>
+        </template>
     </app-layout>
 </template>
 
