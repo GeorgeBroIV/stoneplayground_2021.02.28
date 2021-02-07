@@ -19,9 +19,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     public function update($user, array $input)
     {
         Validator::make($input, [
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'firstname' => ['required', 'min:2', 'max:20', 'regex:/^[A-Za-z]+$/'],
+            'lastname' => ['required', 'min:2', 'max:30', 'regex:/^[A-Za-z]+$/'],
+            'username' => ['required', 'min:2', 'max:20', 'regex:/^[a-zA-Z][a-zA-Z0-9_-]+$/', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'image', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
@@ -35,8 +35,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $this->updateVerifiedUser($user, $input);
         } else {
             $user->forceFill([
-                'firstname' => $input['firstname'],
-                'lastname' => $input['lastname'],
+                'firstname' => ucfirst(strtolower($input['firstname'])),
+                'lastname' => ucfirst(strtolower($input['lastname'])),
                 'username' => $input['username'],
                 'email' => $input['email'],
             ])->save();
@@ -53,8 +53,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     protected function updateVerifiedUser($user, array $input)
     {
         $user->forceFill([
-            'firstname' => $input['firstname'],
-            'lastname' => $input['lastname'],
+            'firstname' => ucfirst(strtolower($input['firstname'])),
+            'lastname' => ucfirst(strtolower($input['lastname'])),
             'username' => $input['username'],
             'email' => $input['email'],
             'email_verified_at' => null,
