@@ -8,9 +8,19 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+                <jet-label for="firstname" value="First Name" />
+                <jet-input id="firstname" type="text" class="mt-1 block w-full" v-model="form.firstname" required autofocus autocomplete="firstname" />
             </div>
+
+          <div class="mt-4">
+            <jet-label for="lastname" value="Last Name" />
+            <jet-input id="lastname" type="text" class="mt-1 block w-full" v-model="form.lastname" required autocomplete="lastname" />
+          </div>
+
+          <div class="mt-4">
+            <jet-label for="username" value="User Name" />
+            <jet-input id="username" type="text" class="mt-1 block w-full" v-model="form.username" required autocomplete="username" />
+          </div>
 
             <div class="mt-4">
                 <jet-label for="email" value="Email" />
@@ -75,7 +85,9 @@
         data() {
             return {
                 form: this.$inertia.form({
-                    name: '',
+                    firstname: '',
+                    lastname: '',
+                    username: '',
                     email: '',
                     password: '',
                     password_confirmation: '',
