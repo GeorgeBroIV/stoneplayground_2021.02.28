@@ -31753,7 +31753,7 @@ var render = function() {
         {
           key: "logo",
           fn: function() {
-            return [_c("jet-authentication-card-logo")]
+            return [_c("jet-application-logo")]
           },
           proxy: true
         }
@@ -31763,7 +31763,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
-          "\n        This is a secure area of the application. Please confirm your password before continuing.\n    "
+          "\n            This is a secure area of the application. Please confirm your password before continuing.\n        "
         )
       ]),
       _vm._v(" "),
@@ -31819,7 +31819,7 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [_vm._v("\n                Confirm\n            ")]
+                [_vm._v("\n                    Confirm\n                ")]
               )
             ],
             1
@@ -31860,7 +31860,7 @@ var render = function() {
         {
           key: "logo",
           fn: function() {
-            return [_c("jet-authentication-card-logo")]
+            return [_c("jet-application-logo")]
           },
           proxy: true
         }
@@ -31870,7 +31870,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
-          "\n        Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.\n    "
+          "\n            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.\n        "
         )
       ]),
       _vm._v(" "),
@@ -31878,7 +31878,7 @@ var render = function() {
         ? _c(
             "div",
             { staticClass: "mb-4 font-medium text-sm text-green-600" },
-            [_vm._v("\n        " + _vm._s(_vm.status) + "\n    ")]
+            [_vm._v("\n            " + _vm._s(_vm.status) + "\n        ")]
           )
         : _vm._e(),
       _vm._v(" "),
@@ -31932,7 +31932,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                Email Password Reset Link\n            "
+                    "\n                    Email Password Reset Link\n                "
                   )
                 ]
               )
@@ -32456,7 +32456,7 @@ var render = function() {
         {
           key: "logo",
           fn: function() {
-            return [_c("jet-authentication-card-logo")]
+            return [_c("jet-application-logo")]
           },
           proxy: true
         }
@@ -32571,7 +32571,11 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [_vm._v("\n                Reset Password\n            ")]
+                [
+                  _vm._v(
+                    "\n                    Reset Password\n                "
+                  )
+                ]
               )
             ],
             1
@@ -32612,7 +32616,7 @@ var render = function() {
         {
           key: "logo",
           fn: function() {
-            return [_c("jet-authentication-card-logo")]
+            return [_c("jet-application-logo")]
           },
           proxy: true
         }
@@ -32627,12 +32631,12 @@ var render = function() {
           !_vm.recovery
             ? [
                 _vm._v(
-                  "\n            Please confirm access to your account by entering the authentication code provided by your authenticator application.\n        "
+                  "\n                Please confirm access to your account by entering the authentication code provided by your authenticator application.\n            "
                 )
               ]
             : [
                 _vm._v(
-                  "\n            Please confirm access to your account by entering one of your emergency recovery codes.\n        "
+                  "\n                Please confirm access to your account by entering one of your emergency recovery codes.\n            "
                 )
               ]
         ],
@@ -32727,12 +32731,12 @@ var render = function() {
                   !_vm.recovery
                     ? [
                         _vm._v(
-                          "\n                    Use a recovery code\n                "
+                          "\n                        Use a recovery code\n                    "
                         )
                       ]
                     : [
                         _vm._v(
-                          "\n                    Use an authentication code\n                "
+                          "\n                        Use an authentication code\n                    "
                         )
                       ]
                 ],
@@ -32746,7 +32750,7 @@ var render = function() {
                   class: { "opacity-25": _vm.form.processing },
                   attrs: { disabled: _vm.form.processing }
                 },
-                [_vm._v("\n                Login\n            ")]
+                [_vm._v("\n                    Login\n                ")]
               )
             ],
             1
@@ -32787,7 +32791,7 @@ var render = function() {
         {
           key: "logo",
           fn: function() {
-            return [_c("jet-authentication-card-logo")]
+            return [_c("jet-application-logo")]
           },
           proxy: true
         }
@@ -32797,7 +32801,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
-          "\n        Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.\n    "
+          "\n            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.\n        "
         )
       ]),
       _vm._v(" "),
@@ -32807,7 +32811,7 @@ var render = function() {
             { staticClass: "mb-4 font-medium text-sm text-green-600" },
             [
               _vm._v(
-                "\n        A new verification link has been sent to the email address you provided during registration.\n    "
+                "\n            A new verification link has been sent to the email address you provided during registration.\n        "
               )
             ]
           )
@@ -32836,7 +32840,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                Resend Verification Email\n            "
+                    "\n                    Resend Verification Email\n                "
                   )
                 ]
               ),
