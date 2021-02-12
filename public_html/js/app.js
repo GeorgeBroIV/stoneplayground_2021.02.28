@@ -28387,7 +28387,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("img", {
     staticClass: "h-14",
-    attrs: { src: "/storage/images/App_Logo.png" }
+    attrs: { src: "/images/App_Logo.png" }
   })
 }
 var staticRenderFns = []
@@ -28415,7 +28415,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("img", {
     staticClass: "h-6",
-    attrs: { src: "/storage/images/App_Icon.png" }
+    attrs: { src: "/images/App_Icon.png" }
   })
 }
 var staticRenderFns = []
