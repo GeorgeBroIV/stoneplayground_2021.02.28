@@ -26,13 +26,13 @@
 
 <script>
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
+    import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
     import JetButton from '@/Jetstream/Button'
 
     export default {
         components: {
             JetAuthenticationCard,
-            JetAuthenticationCardLogo,
+            JetApplicationLogo,
             JetButton,
         },
 

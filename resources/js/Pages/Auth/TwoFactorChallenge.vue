@@ -48,7 +48,7 @@
 
 <script>
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
+    import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
     import JetButton from '@/Jetstream/Button'
     import JetInput from '@/Jetstream/Input'
     import JetLabel from '@/Jetstream/Label'
@@ -57,7 +57,7 @@
     export default {
         components: {
             JetAuthenticationCard,
-            JetAuthenticationCardLogo,
+            JetApplicationLogo,
             JetButton,
             JetInput,
             JetLabel,
