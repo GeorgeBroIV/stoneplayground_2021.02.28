@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '88176f03eda49c1a838c1aabcc3213b3dc207a91',
+    'reference' => '2ec14454e5539a4941cd11f0313428e1f87f13f1',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -483,12 +483,12 @@
     ),
     'laravel/dusk' => 
     array (
-      'pretty_version' => 'v6.11.2',
-      'version' => '6.11.2.0',
+      'pretty_version' => 'v6.11.3',
+      'version' => '6.11.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'be45bc6e6e3cec6f617a422aa0bd92877afc8695',
+      'reference' => '040c8ee2b8fae416843973565dbbcee75b6e84f4',
     ),
     'laravel/fortify' => 
     array (
@@ -524,7 +524,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '88176f03eda49c1a838c1aabcc3213b3dc207a91',
+      'reference' => '2ec14454e5539a4941cd11f0313428e1f87f13f1',
     ),
     'laravel/sail' => 
     array (
@@ -582,12 +582,12 @@
     ),
     'mobiledetect/mobiledetectlib' => 
     array (
-      'pretty_version' => '2.8.35',
-      'version' => '2.8.35.0',
+      'pretty_version' => '2.8.36',
+      'version' => '2.8.36.0',
       'aliases' => 
       array (
       ),
-      'reference' => '68a35170fdf36e7b35f9c125e5102338dbc3ff65',
+      'reference' => 'e55c155f4d1ab299a0cfca8ec29a0154918c9e3d',
     ),
     'mockery/mockery' => 
     array (
@@ -629,12 +629,12 @@
     ),
     'nesbot/carbon' => 
     array (
-      'pretty_version' => '2.45.0',
-      'version' => '2.45.0.0',
+      'pretty_version' => '2.45.1',
+      'version' => '2.45.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e2ba3174ce869da1713c38340dbb36572dfacd5a',
+      'reference' => '528783b188bdb853eb21239b1722831e0f000a8d',
     ),
     'nikic/php-parser' => 
     array (
