@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateTriviaTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('trivia', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('triviacategory_id');
+            $table->smallInteger('numberofquestions');
+            $table->foreignId('triviadifficulty_id');
+            $table->foreignId('triviatype_id');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('trivia');
+    }
+}

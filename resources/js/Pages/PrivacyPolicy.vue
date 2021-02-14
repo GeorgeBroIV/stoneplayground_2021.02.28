@@ -4,12 +4,12 @@
             <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
               <!-- Logo -->
               <div class="flex-shrink-0 flex items-center">
-                <inertia-link :href="route('dashboard')">
+                <inertia-link :href="route('home')">
                   <jet-application-logo class="block h-9 w-auto" />
                 </inertia-link>
               </div>
-
-                <div v-html="policy" class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
+	            <!-- Body -->
+	            <div v-html="policy" class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
                 </div>
             </div>
         </div>

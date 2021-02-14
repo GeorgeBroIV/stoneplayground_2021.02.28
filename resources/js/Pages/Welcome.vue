@@ -1,8 +1,8 @@
 <template>
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
         <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            <inertia-link v-if="$page.props.user" href="/dashboard" class="text-sm text-gray-700 underline">
-                Dashboard
+            <inertia-link v-if="$page.props.user" href="/home" class="text-sm text-gray-700 underline">
+                Home
             </inertia-link>
 
             <template v-else>
@@ -18,12 +18,12 @@
 
         <div class="max-w-6xl pt-10 mx-auto sm:px-6 lg:px-8">
           <div align="center">
-            <inertia-link :href="route('dashboard')">
+            <inertia-link :href="route('home')">
               <img src="/storage/images/App_Logo.png" class="h-14" />
             </inertia-link>
           </div>
 
-            <div class="px-14 mt-8 pb-5 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+          <div class="px-14 mt-8 pb-5 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
 
               <div align="center" class="mt-4 text-2xl middle">
                 Welcome to Stone Playground!
@@ -52,8 +52,8 @@
                 So if you have any thoughts please post a message on the 'Features Wish List' message board once
                 this is available.
               </div>
-              </div>
-          <div class="px-14 mt-5 bg-gray-200 bg-opacity-25 overflow-hidden shadow sm:rounded-lg">
+            </div>
+          <div class="px-14 mt-3 bg-gray-200 bg-opacity-25 overflow-hidden shadow sm:rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-2">
                     <div class="p-6">
                         <div class="flex items-center">
@@ -108,21 +108,9 @@
                     </div>
                 </div>
             </div>
-          <div class="flex py-5">
-            <div class="text-gray-600 ml-7">
-              &copy; 2021 StonePlayground.com | All rights reserved
-            </div>
-            <div class="text-gray-600 ml-7">
-              <inertia-link :href="'/terms-of-service'">
-                Terms of Service
-              </inertia-link>
-            </div>
-            <div class="text-gray-600 ml-7">
-              <inertia-link :href="'/privacy-policy'">
-                Privacy Policy
-              </inertia-link>
-            </div>
-          </div>
+
+	        <Footer />
+
         </div>
     </div>
 </template>
@@ -192,7 +180,13 @@
 </style>
 
 <script>
+
+import Footer from '@/Components/Footer'
+
     export default {
+		components: {
+			Footer
+		},
         props: {
             canLogin: Boolean,
             canRegister: Boolean,
