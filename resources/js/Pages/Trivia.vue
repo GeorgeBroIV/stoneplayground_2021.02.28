@@ -61,7 +61,7 @@
 
 			            <div>
 				            <div>
-					            Difficulty
+					            Criteria: Difficulty
 				            </div>
 				            <select v-model="selectedDifficulty" class="mb-3">
 					            <option
@@ -74,7 +74,7 @@
 
 			            <div>
 				            <div>
-					            Answer Type
+					            Criteria: Answer Type
 				            </div>
 				            <select v-model="selectedType" class="mb-3">
 					            <option
@@ -87,7 +87,7 @@
 
 			            <div>
 				            <div>
-					            Questions
+					            Criteria: Questions
 				            </div>
 				            <b-select v-model="selectedAmount" class="mb-3 w-auto">
 					            <option v-for="amount in this.amtMax">
@@ -97,9 +97,12 @@
 			            </div>
 
 			            <div align="center" v-if="this.empty" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100 w-50">
-				            Sorry, no questions that match your criteria.
-				            <br>
-				            Try adjusting 'Difficulty' or 'Answer Type'
+				            <div class="mb-2 h5">
+					            Sorry, unable to load your selection.
+				            </div>
+				            <div>
+				                Try adjusting the Criteria (e.g. Questions: 1)
+				            </div>
 			            </div>
 
 			            <div class="mt-3">
