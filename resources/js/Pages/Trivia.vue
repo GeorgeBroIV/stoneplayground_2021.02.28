@@ -12,9 +12,9 @@
 <!-- Trivia Content -->
     <div class="py-3">
 	    <b-container class="bv-example-row">
-	      <b-row>
+	      <b-row class="justify-content-md-center">
 <!-- Trivia Stats -->
-	          <b-col sm="3">
+	          <b-col sm="4">
 		          <div class="h3">
 			          Developer Notes
 		          </div>
@@ -28,15 +28,14 @@
 			          Soon to come
 		          </div>
 		          <div class="mt-2 text-gray-500">
+			          Ensure fresh questions between sessions
+		          </div>
+		          <div class="mt-2 text-gray-500">
 			          Trivia Stats
 		          </div>
 		          <div class="mt-2 text-gray-500">
 			          Persistent tab navigation where navigating between pages won't lose your current game state.
 		          </div>
-	          </b-col>
-
-<!-- Column Separator -->
-	          <b-col sm="1">
 	          </b-col>
 
 <!-- Trivia Options / Board -->
@@ -46,6 +45,9 @@
 
 <!-- START - Content from TriviaOptions.vue (commented out below) -->
 		            <div>
+			            <div class="h3 mb-3">
+				            Trivia Game Options
+			            </div>
 			            <div>
 				            Trivia Category
 			            </div>
