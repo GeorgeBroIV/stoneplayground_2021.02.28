@@ -97,7 +97,7 @@
 										</b-select>
 									</div>
 
-									<div align="center" v-if="this.empty && !this.didloadFail && !this.bNewTrivia" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100 w-50">
+									<div align="center" v-if="this.empty && !this.didloadFail" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100 w-50">
 										<div class="mb-2 h5">
 											Loading...
 										</div>
@@ -113,7 +113,7 @@
 									</div>
 
 									<div class="mt-3">
-										<b-button v-if="(!this.triviaActive) && (!this.empty || this.didloadFail)" @click="startSurvey" variant="primary">
+										<b-button v-if="(!this.triviaActive && !this.empty) || this.didloadFail" @click="startSurvey" variant="primary">
 											Start Trivia
 										</b-button>
 									</div>
@@ -208,10 +208,6 @@ export default {
 		questions: {
 			handler() {
 				let myVar = setTimeout(this.loadFailed, 3000);
-				if(!this.questions.length) {
-					this.empty = true
-					this.didloadFail = true
-				}
 			}
 		},
 		triviaActive: {
@@ -227,6 +223,9 @@ export default {
 				this.empty = false
 				this.triviaActive = true
 				this.bNewTrivia = false
+			} else {
+				this.empty = true
+				this.didloadFail = true
 			}
 		},
 		next() {
