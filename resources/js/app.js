@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 Vue.mixin({ methods: { route } });
+
 Vue.use(InertiaPlugin);
 Vue.use(PortalVue);
 Vue.use(BootstrapVue);
