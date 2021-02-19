@@ -14,8 +14,25 @@
 	    <b-container class="bv-example-row">
 	      <b-row>
 <!-- Trivia Stats -->
-	          <b-col align-self="center" sm="3">
-	            Placeholder for Trivia Stats and Save options.
+	          <b-col sm="3">
+		          <div class="h3">
+			          Developer Notes
+		          </div>
+		          <div class="mt-3 mb-1 font-bold">
+			          Now Operational
+		          </div>
+		          <div class="mt-2 text-gray-500">
+			          A cool Trivia game!
+		          </div>
+		          <div class="mt-3 font-bold">
+			          Soon to come
+		          </div>
+		          <div class="mt-2 text-gray-500">
+			          Trivia Stats
+		          </div>
+		          <div class="mt-2 text-gray-500">
+			          Persistent tab navigation where navigating between pages won't lose your current game state.
+		          </div>
 	          </b-col>
 
 <!-- Column Separator -->
@@ -75,6 +92,12 @@
 						            {{ amount }}
 					            </option>
 				            </b-select>
+			            </div>
+
+			            <div align="center" v-if="this.empty" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100 w-50">
+				            Sorry, no questions that match your criteria.
+				            <br>
+				            Try adjusting 'Difficulty' or 'Answer Type'
 			            </div>
 
 			            <div class="mt-3">
@@ -154,7 +177,7 @@
     },
     data() {
       return {
-        questions: [],
+        questions: null,
         index: 0,
         numCorrect: 0,
         numCurrentQuestion: 1,
@@ -168,6 +191,7 @@
 	      selectedType: "any",
 	      selectedAmount: 10,
 	      amtMax: 50,
+	      empty: false,
       }
     },
     methods: {
@@ -186,7 +210,7 @@
 		    this.selectedDifficulty = "any";
 		    this.selectedType = "any";
 		    this.selectedAmount = 10;
-		    this.questions = [];
+		    this.questions = null;
 			this.index = 0;
 			this.numCorrect = 0;
 			this.numCurrentQuestion = 1;
@@ -211,16 +235,21 @@
 //						this.loading = false
 //			    });
 		        let loaded=this.callFetch(urlTrivia);
-				this.triviaActive = !this.triviaActive
+		        if(this.questions) {
+		        	this.empty = false
+			        this.triviaActive = !this.triviaActive
+		        } else {
+		        	this.empty = true
+		        }
 	    },
-			    async callFetch(urlTrivia) {
-			      let response = await Promise.resolve(fetch(urlTrivia, {method: 'get'}))
-			      .then(response => {return response.json()})
-			      .then(jsonData => {
-			        this.questions = jsonData.results
-			        this.numTotalQuestions = jsonData.results.length
-			      })
-			    }
+	    async callFetch(urlTrivia) {
+	      let response = await Promise.resolve(fetch(urlTrivia, {method: 'get'}))
+	      .then(response => {return response.json()})
+	      .then(jsonData => {
+	        this.questions = jsonData.results
+	        this.numTotalQuestions = jsonData.results.length
+	      })
+	    }
     }
   }
 </script>
