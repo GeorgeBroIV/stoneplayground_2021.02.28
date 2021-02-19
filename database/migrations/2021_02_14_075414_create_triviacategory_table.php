@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTriviatypeTable extends Migration
+class CreateTriviacategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateTriviatypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('triviatype', function (Blueprint $table) {
+        Schema::create('triviacategory', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-	        $table->foreignId('slugname_id');
-	        $table->string('slugvalue')->unique();
+	        $table->foreignId('triviaslugname_id');
+	        $table->smallInteger('slugvalue')->unique();
             $table->timestamps();
+            $table->foreign('triviaslugname_id')->references('id')->on('triviaslugname')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -29,6 +30,6 @@ class CreateTriviatypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('triviatype');
+        Schema::dropIfExists('triviacategory');
     }
 }

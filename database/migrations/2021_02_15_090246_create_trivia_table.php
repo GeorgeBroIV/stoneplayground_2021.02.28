@@ -15,10 +15,8 @@ class CreateTriviaTable extends Migration
     {
         Schema::create('trivia', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('triviacategory_id');
-            $table->smallInteger('numberofquestions');
-            $table->foreignId('triviadifficulty_id');
-            $table->foreignId('triviatype_id');
+	        $table->foreignId('user_id');
+	        $table->string('opentdb_token')->unique();
             $table->timestamps();
         });
     }

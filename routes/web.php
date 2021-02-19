@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\TriviaOptionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +41,6 @@ use Inertia\Inertia;
 |
 */
 
-
-
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -55,6 +54,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('/trivia', function () {
-	return Inertia::render('Trivia');
-})->name('trivia');
+Route::get('/trivia', ['App\Http\Controllers\TriviaController', 'index'])->middleware('verified')->name('trivia');

@@ -1,7 +1,7 @@
 <template>
-  <div class="max-w-6xl pt-3 mx-auto sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
     <div class="question-box-container">
-      <p>Category: {{ currentQuestion.category }}</p>
+      <div align="center" class="text-2xl mb-2">Category: {{ currentQuestion.category }}</div>
       <b-jumbotron>
 
         <!-- Question -->
@@ -25,60 +25,50 @@
           </b-list-group-item>
         </b-list-group>
 
+      <!-- Status Message -->
+      <div id='statusSubmit' align="center" v-if="!answered && selectedIndex === null" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
+	      Select an answer.
+      </div>
+      <div id='statusNext' align="center" v-if="answered && selectedIndex === correctIndex" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
+	      Correct!
+      </div>
+      <div id='statusNewGame' align="center" v-if="answered && selectedIndex !== correctIndex" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
+	      Wrong guess.
+      </div>
+
         <!-- Form Buttons -->
-        <div align="center" v-if="numTotal !== questions">
+        <div align="center" v-if="numCurrentQuestion-1 !== numTotalQuestions">
           <b-button
+              v-if="!answered && selectedIndex !== null"
               variant="primary"
               @click="submitAnswer"
-              :disabled="selectedIndex === null || answered"
           >
             Submit
           </b-button>
           <b-button
+	          v-if="answered"
               @click="next"
               variant="success"
               href="#"
-              :disabled="!answered"
           >
             Next
           </b-button>
         </div>
-        <div align="center" v-if="numTotal === questions">
-          <b-button variant="primary" :href="route('trivia')" :active="route().current('trivia')">
-            Try another Trivia game
-          </b-button>
-        </div>
 
       </b-jumbotron>
-      <div id='status' align="center" v-if="!answered" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
-        Select an answer and click 'Submit'.
-      </div>
-      <div id='status' align="center" v-if="answered && selectedIndex === correctIndex" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
-        Correct!  Click 'Next' for the next question.
-      </div>
-      <div id='status' align="center" v-if="answered && selectedIndex !== correctIndex" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
-        Wrong guess, click 'Next' for the next question.
-      </div>
-
 
     </div>
   </div>
 </template>
 
 <script>
-import JetNavLink from '@/Jetstream/NavLink'
-
   export default {
-    components: {
-      JetNavLink
-    },
     props: {
       currentQuestion: Object,
       next: Function,
       increment: Function,
-      numTotal: Number,
-      questions: Number
-
+      numCurrentQuestion: Number,
+      numTotalQuestions: Number,
     },
     data() {
       return {
@@ -103,7 +93,7 @@ import JetNavLink from '@/Jetstream/NavLink'
           this.answered = false
           this.shuffleAnswers()
         }
-      }
+      },
     },
     methods: {
       selectAnswer(index) {
@@ -115,7 +105,6 @@ import JetNavLink from '@/Jetstream/NavLink'
           isCorrect = true
         }
         this.answered = true
-
         this.increment(isCorrect)
       },
       shuffleAnswers() {

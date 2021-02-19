@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTriviadifficultyTable extends Migration
+class CreateTriviatypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateTriviadifficultyTable extends Migration
      */
     public function up()
     {
-        Schema::create('triviadifficulty', function (Blueprint $table) {
+        Schema::create('triviatype', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-	        $table->foreignId('slugname_id');
 	        $table->string('slugvalue')->unique();
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ class CreateTriviadifficultyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('triviadifficulty');
+        Schema::dropIfExists('triviatype');
     }
 }

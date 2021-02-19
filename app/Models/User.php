@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Trivia;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -60,4 +61,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+	
+	public function trivia()
+	{
+		return $this->belongsToMany(Trivia::class);
+	}
 }
