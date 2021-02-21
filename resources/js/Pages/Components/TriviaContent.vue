@@ -1,53 +1,53 @@
 <template>
   <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
     <div class="question-box-container">
-      <div align="center" class="text-2xl mb-2">Category: {{ currentQuestion.category }}</div>
+      <div align="center" class="text-2xl mb-2">Category: {{ oCurrentQuestion.category }}</div>
       <b-jumbotron>
 
         <!-- Question -->
-        <template slot="lead" v-html="currentQuestion.question">
-          <div v-html="currentQuestion.question">
-          {{ currentQuestion.question }}
+        <template slot="lead" v-html="oCurrentQuestion.question">
+          <div v-html="oCurrentQuestion.question">
+          {{ oCurrentQuestion.question }}
           </div>
         </template>
 
         <!-- List of Answers (use v-html to suppress escaping of special characters -->
         <b-list-group>
           <b-list-group-item
-              v-for="(answer, index) in answers"
+              v-for="(answer, index) in aAnswers"
               v-html="answer"
               :key="index"
-              @click="selectAnswer(index)"
-              :class="answerClass(index)"
-              :disabled="answered"
+              @click="mSelectAnswer(index)"
+              :class="sAnswerClass(index)"
+              :disabled="bAnswered"
           >
             {{ answer }}
           </b-list-group-item>
         </b-list-group>
 
       <!-- Status Message -->
-      <div id='statusSubmit' align="center" v-if="!answered && selectedIndex === null" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
+      <div id='statusSubmit' align="center" v-if="!bAnswered && iSelectedIndex === null" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
 	      Select an answer.
       </div>
-      <div id='statusNext' align="center" v-if="answered && selectedIndex === correctIndex" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
+      <div id='statusNext' align="center" v-if="bAnswered && iSelectedIndex === iCorrectIndex" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
 	      Correct!
       </div>
-      <div id='statusNewGame' align="center" v-if="answered && selectedIndex !== correctIndex" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
+      <div id='statusNewGame' align="center" v-if="bAnswered && iSelectedIndex !== iCorrectIndex" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100">
 	      Wrong guess.
       </div>
 
         <!-- Form Buttons -->
-        <div align="center" v-if="numCurrentQuestion-1 !== numTotalQuestions">
+        <div align="center" v-if="iCurrentQuestion-1 !== iTotalQuestions">
           <b-button
-              v-if="!answered && selectedIndex !== null"
+              v-if="!bAnswered && iSelectedIndex !== null"
               variant="primary"
-              @click="submitAnswer"
+              @click="mSubmitAnswer"
           >
             Submit
           </b-button>
           <b-button
-	          v-if="answered"
-              @click="next"
+	          v-if="bAnswered"
+              @click="mNext"
               variant="success"
               href="#"
           >
@@ -64,67 +64,67 @@
 <script>
   export default {
     props: {
-      currentQuestion: Object,
-      next: Function,
-      increment: Function,
-      numCurrentQuestion: Number,
-      numTotalQuestions: Number,
+		iCurrentQuestion: Number,
+	    iTotalQuestions: Number,
+        oCurrentQuestion: Object,
+	    mIncrement: Function,
+        mNext: Function,
     },
     data() {
       return {
-        selectedIndex: null,
-        correctIndex: null,
-        shuffledAnswers: [],
-        answered: false,
+        iSelectedIndex: null,
+        iCorrectIndex: null,
+        mShuffledAnswers: [],
+        bAnswered: false,
       }
     },
     computed: {
-      answers() {
-        let answers = [...this.currentQuestion.incorrect_answers];
-        answers.push(this.currentQuestion.correct_answer)
-        return answers
+      aAnswers() {
+        let aAnswers = [...this.oCurrentQuestion.incorrect_answers];
+        aAnswers.push(this.oCurrentQuestion.correct_answer)
+        return aAnswers
       }
     },
     watch: {
-      currentQuestion: {
+      oCurrentQuestion: {
         immediate: true,
         handler() {
-          this.selectedIndex = null
-          this.answered = false
-          this.shuffleAnswers()
+          this.iSelectedIndex = null
+          this.bAnswered = false
+          this.mShuffleAnswers()
         }
       },
     },
     methods: {
-      selectAnswer(index) {
-        this.selectedIndex = index
+      mSelectAnswer(index) {
+        this.iSelectedIndex = index
       },
-      submitAnswer() {
-        let isCorrect = false
-        if (this.selectedIndex === this.correctIndex) {
-          isCorrect = true
+      mSubmitAnswer() {
+        let bIsCorrect = false
+        if (this.iSelectedIndex === this.iCorrectIndex) {
+          bIsCorrect = true
         }
-        this.answered = true
-        this.increment(isCorrect)
+        this.bAnswered = true
+        this.mIncrement(bIsCorrect)
       },
-      shuffleAnswers() {
-        let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
-        this.shuffledAnswers = _.shuffle(answers)
-        this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
+      mShuffleAnswers() {
+        let aAnswers = [...this.oCurrentQuestion.incorrect_answers, this.oCurrentQuestion.correct_answer]
+        this.mShuffledAnswers = _.shuffle(aAnswers)
+        this.iCorrectIndex = this.mShuffledAnswers.indexOf(this.oCurrentQuestion.correct_answer)
       },
-      answerClass(index) {
-        let answerClass = ''
-        if (!this.answered && this.selectedIndex === index) {
-          answerClass = 'selected'
-        } else if (this.answered && this.correctIndex === index) {
-          answerClass = 'correct'
+      sAnswerClass(index) {
+        let sAnswerClass = ''
+        if (!this.bAnswered && this.iSelectedIndex === index) {
+          sAnswerClass = 'selected'
+        } else if (this.bAnswered && this.iCorrectIndex === index) {
+          sAnswerClass = 'correct'
         } else if (
-            this.answered
-            && this.selectedIndex === index
-            && this.correctIndex !== index) {
-          answerClass = 'incorrect'
+            this.bAnswered
+            && this.iSelectedIndex === index
+            && this.iCorrectIndex !== index) {
+          sAnswerClass = 'incorrect'
         }
-        return answerClass
+        return sAnswerClass
       }
     }
   }

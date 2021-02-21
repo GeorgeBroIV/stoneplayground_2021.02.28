@@ -21,24 +21,24 @@ class TriviaController extends Controller
     public function index()
     {
 	    // Trivia Categories
-	    $triviaCategories = new Collection();
+	    $oTriviaCategories = new Collection();
 	    $categories = Triviacategory::with('triviaslugname')->get();
 	    foreach($categories as $category) {
-		    $triviaCategories[$category->slugvalue] = $category->name;
+		    $oTriviaCategories[$category->slugvalue] = $category->name;
 	    }
 	
 	    // Trivia Difficulty
-	    $triviaDifficulties = new Collection();
+	    $oTriviaDifficulties = new Collection();
 	    $difficulties = Triviadifficulty::with('triviaslugname')->get();
 	    foreach($difficulties as $difficulty) {
-		    $triviaDifficulties[$difficulty->slugvalue] = $difficulty->name;
+		    $oTriviaDifficulties[$difficulty->slugvalue] = $difficulty->name;
 	    }
 	
 	    // Trivia Type
-	    $triviaTypes = Triviatype::get()->pluck('name', 'slugvalue');
+	    $oTriviaTypes = Triviatype::get()->pluck('name', 'slugvalue');
 	
 	    // Return
-	    return Inertia::render('Trivia', compact('triviaCategories', 'triviaDifficulties', 'triviaTypes'));
+	    return Inertia::render('Trivia', compact('oTriviaCategories', 'oTriviaDifficulties', 'oTriviaTypes'));
     }
 
     /**
