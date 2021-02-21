@@ -43,6 +43,27 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
+| Add CORS middleware functionality (added by George)
+|--------------------------------------------------------------------------
+|
+| https://github.com/fruitcake/laravel-cors
+|
+| Next, we need to register the CORS middleware functionality
+| so that the app can request data from external websites, and so
+| the app can access additinal response headers (such as session data)
+|
+| Also, with 'pa vendor:publish (choosing:
+| 'Provider: Fruitcake\Cors\CorsServiceProvider' and
+| 'Tag: cors'
+| we can
+|
+*/
+
+//$app->register(Fruitcake\Cors\CorsServiceProvider::class);
+//$app->configure('cors');
+
+/*
+|--------------------------------------------------------------------------
 | Return The Application
 |--------------------------------------------------------------------------
 |

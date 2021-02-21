@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\TriviaOptionsController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,4 +55,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('/trivia', ['App\Http\Controllers\TriviaController', 'index'])->middleware('verified')->name('trivia');
+Route::get('/trivia', ['App\Http\Controllers\TriviaController', 'index'])->middleware(['verified'])->name('trivia');

@@ -8,6 +8,7 @@ import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import VueCookies from 'vue-cookies';
 
 Vue.mixin({ methods: { route } });
 
@@ -15,6 +16,7 @@ Vue.use(InertiaPlugin);
 Vue.use(PortalVue);
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
+Vue.use(VueCookies);
 
 const app = document.getElementById('app');
 

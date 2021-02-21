@@ -41,6 +41,7 @@
 
 						<!-- Trivia Options / Board -->
 						<b-col sm="8">
+
 							<!-- Trivia Options -->
 							<div id="triviaOptions" v-if="!triviaActive">
 
@@ -52,6 +53,7 @@
 									<div>
 										Trivia Category
 									</div>
+
 									<select v-model="selectedCategory" class="mb-3">
 										<option
 											v-for="(category, index) in this.triviaCategories"
@@ -99,7 +101,7 @@
 
 									<div align="center" v-if="this.empty && !this.didloadFail" class="mt-0 mb-3 py-2 text-gray-700 bg-blue-100 w-50">
 										<div class="mb-2 h5">
-											Loading...
+											Loading... (will generate error if response not received in {{ intTimeout/1000 }} seconds)
 										</div>
 									</div>
 
@@ -193,6 +195,7 @@ export default {
 			numTotalQuestions: 0,
 			selectedIndex: 0,
 			triviaActive: false,
+			intTimeout: 0,
 			loading: null,
 			selectedCategory: 0,
 			selectedDifficulty: "any",
@@ -202,12 +205,19 @@ export default {
 			empty: false,
 			didloadFail: false,
 			bNewTrivia: false,
+			strSessionToken: '',
 		}
 	},
 	watch: {
 		questions: {
 			handler() {
-				let myVar = setTimeout(this.loadFailed, 3000);
+				if(this.questions) {
+					while (!this.questions.length) {
+						let myVar = setTimeout(this.loading = true, this.intTimeout);
+					}
+					this.loading = false;
+					this.loadFailed();
+				}
 			}
 		},
 		triviaActive: {
@@ -219,10 +229,11 @@ export default {
 	},
 	methods: {
 		loadFailed() {
-			if(this.questions.length) {
+			if (this.questions.length) {
 				this.empty = false
 				this.triviaActive = true
 				this.bNewTrivia = false
+				this.strSessionToken = this.$cookies.get('PHPSESSID')
 			} else {
 				this.empty = true
 				this.didloadFail = true
@@ -258,7 +269,10 @@ export default {
 			let urlCategory = this.selectedCategory === '0' ? '' : '&category=' + this.selectedCategory;
 			let urlDifficulty = this.selectedDifficulty === 'any' ? '' : '&difficulty=' + this.selectedDifficulty;
 			let urlType = this.selectedType === 'any' ? '' : '&type=' + this.selectedType;
-			let urlTrivia = 'https://opentdb.com/api.php?amount=' + this.selectedAmount + urlCategory + urlDifficulty + urlType;
+			if (this.strSessionToken) {
+				let urlSessionToken = '&token=' + this.strSessionToken;
+			}
+			let urlTrivia = 'https://opentdb.com/api.php?amount=' + this.selectedAmount + urlCategory + urlDifficulty + urlType; // + strSessionToken;
 //				this.loading = true;
 //		    this.$inertia.get(urlTrivia)
 //			    .then(response => {
@@ -269,21 +283,23 @@ export default {
 //				    this.numTotalQuestions = jsonData.results.length
 //						this.loading = false
 //			    });
-			let loaded=this.callFetch(urlTrivia);
-			if(this.questions) {
-				this.empty = false
-				this.triviaActive = true
-			} else {
-				this.empty = true
-			}
+			let loaded = this.callFetch(urlTrivia);
+//			if (this.questions) {
+//				this.empty = false
+//				this.triviaActive = true
+//			} else {
+//				this.empty = true
+//			}
 		},
 		async callFetch(urlTrivia) {
-			let response = await Promise.resolve(fetch(urlTrivia, {method: 'get'}))
-				.then(response => {return response.json()})
-				.then(jsonData => {
-					this.questions = jsonData.results
-					this.numTotalQuestions = jsonData.results.length
-				})
+			let response = Promise.resolve(fetch(urlTrivia, {method: 'get'}))
+			.then(response => {
+				return response.json()
+			})
+			.then(jsonData => {
+				this.questions = jsonData.results
+				this.numTotalQuestions = jsonData.results.length
+			})
 		}
 	}
 }
