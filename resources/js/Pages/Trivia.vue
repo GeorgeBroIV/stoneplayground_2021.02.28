@@ -149,8 +149,6 @@ varTest:'',
 					.catch(({response}) => {
 						this.bLoading = false;
 						this.bError = true;
-this.varTest="mFetchData.catch";
-return;
 					})
 					.finally(response => {
 						this.varTest = 'mFetchData';
@@ -164,8 +162,6 @@ return;
 					.catch(({response}) => {
 						this.bLoading = false;
 						this.bError = true;
-this.varTest="mGetData.catch";
-return;
 					})
 					.finally(response => {
 						this.mParseData()
