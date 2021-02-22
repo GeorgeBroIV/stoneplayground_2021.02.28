@@ -21,7 +21,6 @@
 
           <!-- Page Footer -->
           <Footer />
-
             <!-- Modal Portal -->
             <portal-target name="modal" multiple>
             </portal-target>

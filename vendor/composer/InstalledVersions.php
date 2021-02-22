@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'cf6251e6402a69cad00f8ffe6d329bfcba12fbfc',
+    'reference' => '7856d5f1a31678bb76122d443f132a5e2f1f188d',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -548,7 +548,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'cf6251e6402a69cad00f8ffe6d329bfcba12fbfc',
+      'reference' => '7856d5f1a31678bb76122d443f132a5e2f1f188d',
     ),
     'laravel/sail' => 
     array (
@@ -606,12 +606,12 @@ private static $installed = array (
     ),
     'mobiledetect/mobiledetectlib' => 
     array (
-      'pretty_version' => '2.8.36',
-      'version' => '2.8.36.0',
+      'pretty_version' => '2.8.37',
+      'version' => '2.8.37.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e55c155f4d1ab299a0cfca8ec29a0154918c9e3d',
+      'reference' => '9841e3c46f5bd0739b53aed8ac677fa712943df7',
     ),
     'mockery/mockery' => 
     array (
