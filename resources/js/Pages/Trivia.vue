@@ -12,15 +12,16 @@
 						<b-col sm="3">
 							<div id="divTriviaStats">
 								<TriviaStats
+									:aTriviaCategories="aTriviaCategories"
 									:bTriviaActive="bTriviaActive"
 									:iCorrect="iCorrect"
 									:iCurrentQuestionDisplay="iCurrentQuestionDisplay"
 									:iGlobalCorrect="iGlobalCorrect"
 									:iGlobalGames="iGlobalGames"
 									:iGlobalQuestions="iGlobalQuestions"
+									:iNumCategories="iNumCategories"
 									:iTotalQuestions="iTotalQuestions"
 									:mGetData="mGetData"
-									:oTriviaCategories="oTriviaCategories"
 									:sTotalVerifiedQuestions="sTotalVerifiedQuestions"
 								/>
 							</div>
@@ -28,14 +29,16 @@
 						<b-col sm="5" class="pl-3">
 							<div id="divTriviaOptions" v-if="!bTriviaActive">
 								<TriviaOptions
+									@eSelectedValue="mSelectedValue"
+									@eResetVars="mResetVars"
+									:aTriviaCategories="aTriviaCategories"
 									:bError="bError"
 									:bLoadFail="bLoadFail"
 									:bLoading="bLoading"
 									:iAmtMax="iAmtMax"
 									:iSelectedAmount="iSelectedAmount"
 									:iSelectedCategory="iSelectedCategory"
-									:mResetVars="mResetVars"
-									:oTriviaCategories="oTriviaCategories"
+									:oFetch="oFetch"
 									:oTriviaDifficulties="oTriviaDifficulties"
 									:oTriviaTypes="oTriviaTypes"
 									:sSelectedDifficulty="sSelectedDifficulty"
@@ -91,7 +94,6 @@
 	export default {
 		name: 'trivia',
 		props: {
-			oTriviaCategories: Object,
 			oTriviaDifficulties: Object,
 			oTriviaTypes: Object,
 		},
@@ -107,6 +109,7 @@
 		data() {
 			return {
 				aQuestions: [],
+				aTriviaCategories: [],
 				bConstraints: false,
 				bEmpty: false,
 				bError: false,
@@ -123,24 +126,28 @@
 				iGlobalCorrect: 0,
 				iGlobalGames: 0,
 				iGlobalQuestions: 0,
+				iNumCategories: 0,
 				iSelectedAmount: 10,
-				iSelectedCategory: 0,
+				iSelectedCategory: 9,
 				iSelectedIndex: 0,
 				iTimeout: 0,
 				iTotalQuestions: 0,
 				oFetch: '',
-				sSelectedDifficulty: "any",
-				sSelectedType: "any",
+				sFinally: '',
+				sSelectedDifficulty: 'any',
+				sSelectedType: 'any',
 				sSessionToken: 'init',
 				sTotalVerifiedQuestions: '',
 				setVisibility: 'hidden',
 				sUrlTriviaAPI: 'https://opentdb.com/api.php?amount=',
+				sUrlTriviaAPICategories: 'https://opentdb.com/api_category.php',
+				sUrlTriviaAPIStats: 'https://opentdb.com/api_count_global.php',
 				sUrlTriviaTokenReset: 'https://opentdb.com/api_token.php?command=reset&token=',
 				sUrlTriviaTokenRetrieve: 'https://opentdb.com/api_token.php?command=request',
-varTest:'',
 			}
 		},
 		methods: {
+			// Called from mGetData
 			async mFetchData(url) {
 				return await fetch(url, {method: 'get'})
 					.then(response => {
@@ -151,7 +158,7 @@ varTest:'',
 						this.bError = true;
 					})
 					.finally(response => {
-						this.varTest = 'mFetchData';
+						this.sFinally = 'mFetchData.finally';
 					})
 			},
 			async mGetData(url) {
@@ -219,8 +226,17 @@ varTest:'',
 						this.mResetSessionToken(this.sSessionToken)
 					}
 				} else if(this.oFetch.overall) {
+					// Exists when 'TriviaAPIStats is called (mounted() lifecycle)
 					let iVerifiedQuestions = this.oFetch.overall.total_num_of_verified_questions
 					this.sTotalVerifiedQuestions = this.mNumberWithCommas(iVerifiedQuestions)
+					let oCategories = this.oFetch.categories
+					this.iNumCategories = Object.keys(oCategories).length
+					// Fetch categories
+					this.mGetData(this.sUrlTriviaAPICategories)
+				} else if(this.oFetch.trivia_categories) {
+					// Exists when 'Fetch Categories' is called, and contains array of category arrays.
+					let categories = this.oFetch.trivia_categories
+					this.aTriviaCategories = categories
 				}
 			},
 			mResetSessionToken(token) {
@@ -240,7 +256,7 @@ varTest:'',
 				this.iCurrentQuestionDisplay = 1;
 				this.iIndex = 0;
 				this.iSelectedAmount = 10;
-				this.iSelectedCategory = 0;
+				this.iSelectedCategory = 9;
 				this.iTotalQuestions = 0;
 				this.sSelectedDifficulty = "any";
 				this.sSelectedType = "any";
@@ -277,10 +293,24 @@ varTest:'',
 				if(this.oFetch.response_code == 1) {
 					this.bConstraints = true
 				}
-			}
+			},
+			mSelectedValue(variable) {
+				if(variable.id === 'category') {
+					this.iSelectedCategory = Number(variable.value);
+				}else if(variable.id==='amount') {
+					this.iSelectedAmount = Number(variable.value);
+				}else if(variable.id==='difficulty') {
+					this.sSelectedDifficulty = variable.value;
+				}else if(variable.id==='type') {
+					this.sSelectedType = variable.value;
+				}
+			},
 		},
 		beforeUpdate() {
 			this.setVisibility = 'visible'
+		},
+		mounted() {
+			this.mGetData(this.sUrlTriviaAPIStats)
 		},
 		watch: {
 			setVisibility: {
@@ -294,8 +324,32 @@ varTest:'',
 				handler() {
 					this.bTriviaActive = this.bTriviaActive;
 				}
-			}
-		},
+			},
+			iSelectedCategory: {
+				immediate: true,
+				handler() {
+					this.iSelectedCategory = this.iSelectedCategory;
+				}
+			},
+			iSelectedAmount: {
+				immediate: true,
+				handler() {
+					this.iSelectedAmount = this.iSelectedAmount;
+				}
+			},
+			sSelectedDifficulty: {
+				immediate: true,
+				handler() {
+					this.sSelectedDifficulty = this.sSelectedDifficulty;
+				}
+			},
+			sSelectedType: {
+				immediate: true,
+				handler() {
+					this.sSelectedType = this.sSelectedType;
+				}
+			},
+		}
 	}
 
 </script>

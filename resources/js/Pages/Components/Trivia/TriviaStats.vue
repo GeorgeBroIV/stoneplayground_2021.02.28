@@ -33,7 +33,7 @@
 				Open Trivia Database
 			</div>
 			<div class="mt-2 text-gray-500">
-				Trivia Categories: {{ this.iCategories }}
+				Trivia Categories: {{ this.iNumCategories }}
 			</div>
 			<div class="mt-2 text-gray-500">
 				Verified Questions: {{ this.sTotalVerifiedQuestions }}
@@ -45,26 +45,18 @@
 <script>
 	export default {
 		name: "TriviaStats",
-		data() {
-			return {
-				iCategories: 0,
-				sUrlTriviaAPIStats: 'https://opentdb.com/api_count_global.php',
-			}
-		},
-		mounted() {
-			this.mGetData(this.sUrlTriviaAPIStats)
-			this.iCategories = Object.keys(this.oTriviaCategories).length
-		},
 		props: {
+			aTriviaCategories: Array,
 			bTriviaActive: Boolean,
 			iCorrect: Number,
 			iCurrentQuestionDisplay: Number,
 			iGlobalCorrect: Number,
 			iGlobalGames: Number,
 			iGlobalQuestions: Number,
+			iNumCategories: Number,
 			iTotalQuestions: Number,
 			mGetData: Function,
-			oTriviaCategories: Object,
+			oFetch: Object,
 			sTotalVerifiedQuestions: String,
 		},
 	}
